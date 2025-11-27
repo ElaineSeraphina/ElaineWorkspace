@@ -36,6 +36,14 @@ function generateTrades(count: number, profitBias: number): Trade[] {
   return trades.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
 }
 
+/**
+ * Generates simulated performance history for an AI model.
+ * @param days - Number of days of history to generate
+ * @param initialValue - Starting account value in USD
+ * @param volatility - Controls price swing magnitude (0.5 = low, 1.5 = high, typical range: 0.5-2.0)
+ * @param trend - Directional bias (-0.5 = bearish, 0.5 = bullish, typical range: -0.5 to 0.5)
+ * @returns Array of performance data points with hourly resolution
+ */
 function generatePerformanceHistory(days: number, initialValue: number, volatility: number, trend: number): PerformancePoint[] {
   const history: PerformancePoint[] = [];
   const now = new Date();

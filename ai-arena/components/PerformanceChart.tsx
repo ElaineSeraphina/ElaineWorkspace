@@ -19,6 +19,9 @@ export default function PerformanceChart({
   showGrid = true,
   type = 'area'
 }: PerformanceChartProps) {
+  // Create a safe ID from the color by removing special characters
+  const safeColorId = color.replace(/[^a-zA-Z0-9]/g, '');
+  
   const chartData = data.map((point, index) => ({
     ...point,
     time: index,
@@ -83,7 +86,7 @@ export default function PerformanceChart({
           />
           <Tooltip content={<CustomTooltip />} />
           <defs>
-            <linearGradient id={`gradient-${color.replace('#', '')}`} x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id={`gradient-${safeColorId}`} x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor={color} stopOpacity={0.3} />
               <stop offset="100%" stopColor={color} stopOpacity={0} />
             </linearGradient>
@@ -93,7 +96,7 @@ export default function PerformanceChart({
             dataKey="accountValue"
             stroke={color}
             strokeWidth={2}
-            fill={`url(#gradient-${color.replace('#', '')})`}
+            fill={`url(#gradient-${safeColorId})`}
           />
         </AreaChart>
       </ResponsiveContainer>
